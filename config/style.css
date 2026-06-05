@@ -1,0 +1,40 @@
+window#waybar {
+    background-color: transparent;
+    color: #ffffff;
+    font-family: "JetBrainsMono Nerd Font", sans-serif;
+    font-size: 13px;
+}
+
+#workspaces,
+#window,
+#clock,
+#cpu,
+#memory,
+#network,
+#tray {
+    background: rgba(30, 30, 30, 0.7);
+    padding: 0 15px;
+    margin: 5px 2px;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+#workspaces button {
+    padding: 0 2px;
+    color: #888888;
+}
+
+#workspaces button.active {
+    color: #ffffff;
+}
+
+#workspaces button:hover {
+    background: transparent;
+    color: #ffffff;
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+}
+
+#window {
+    background: transparent;
+    border: none;
+}

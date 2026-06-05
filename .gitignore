@@ -1,0 +1,11 @@
+# Carpetas y archivos de compilación
+*.o
+*.out
+katarenai
+legacy/
+
+# Caché de VS Code
+.vscode/
+
+# Otros
+.DS_Store

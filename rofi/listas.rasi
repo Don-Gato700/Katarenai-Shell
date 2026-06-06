@@ -1,0 +1,61 @@
+configuration {
+    show-icons: false;
+}
+
+/* Paleta Catppuccin Mocha */
+* {
+    background:     rgba(30, 30, 46, 0.65); /* Mocha Base transparente */
+    background-alt: rgba(49, 50, 68, 0.6);   /* Surface0 */
+    foreground:     #cdd6f4;                 /* Text */
+    accent:         #cba6f7;                 /* Mauve */
+}
+
+window {
+    background-color:   @background;
+    text-color:         @foreground;
+    border:             2px;
+    border-color:       rgba(137, 180, 250, 0.2); /* Sutil azul */
+    border-radius:      20px;
+    width:              650px;
+    padding:            20px;
+    location:           center;
+}
+
+/* El contenedor principal de Rofi (obligatorio ponerlo transparente) */
+mainbox {
+    background-color:   transparent;
+    children:           [ listview ]; /* Esto quita la barra superior de texto "dmenu" por completo */
+}
+
+listview {
+    background-color:   transparent;
+    columns:            1; 
+    lines:              6;
+    spacing:            8px;
+    cycle:              true;
+    dynamic:            true;
+    layout:             vertical;
+}
+
+element {
+    background-color:   transparent;
+    text-color:         @foreground;
+    orientation:        vertical;
+    border-radius:      12px;
+    padding:            20px 0px;
+}
+
+element-text {
+    background-color:   transparent;
+    text-color:         inherit;
+    font:               "JetBrainsMono Nerd Font 32"; 
+    horizontal-align:   0.5;
+    vertical-align:     0.5;
+}
+
+element selected {
+    background-color:   @background-alt;
+    text-color:         @accent;
+    border:             2px;
+    border-color:       @accent;
+}

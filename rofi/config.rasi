@@ -1,0 +1,6 @@
+configuration {
+    modi: "drun,run,window,filebrowser";
+    show-icons: true;
+    terminal: "kitty";
+}
+@theme "~/.config/hypr/widgets/modern-split.rasi"

@@ -1,0 +1,58 @@
+configuration {
+    show-icons:         false;
+}
+
+* {
+    font: "JetBrainsMono Nerd Font 10";
+    background:         rgba(30, 30, 46, 0.75);
+    background-alt:     rgba(45, 47, 71, 0.5);
+    foreground:         #cdd6f4;
+    selected:           #e0d5c1; /* Color crema/hueso de la captura */
+    transparent:        rgba(0, 0, 0, 0);
+}
+
+window {
+    background-color:   @background;
+    text-color:         @foreground;
+    border:             1px;
+    border-color:       @selected;
+    border-radius:      16px; /* Esquinas bien marcadas como la foto */
+    width:              350px;
+    location:           north east;
+    anchor:             north east;
+    x-offset:           -15px;
+    y-offset:           60px;
+}
+
+mainbox {
+    background-color:   @transparent;
+    children:           [ listview ];
+    padding:            15px;
+}
+
+listview {
+    background-color:   @transparent;
+    columns:            1;
+    lines:              6;
+    spacing:            10px;
+    cycle:              true;
+    dynamic:            true;
+    layout:             vertical;
+}
+
+element {
+    background-color:   @background-alt;
+    text-color:         @foreground;
+    border-radius:      10px;
+    padding:            12px;
+}
+
+element selected {
+    background-color:   @selected;
+    text-color:         #1e1e2e;
+}
+
+element-text {
+    background-color:   @transparent;
+    text-color:         inherit;
+}

@@ -1,0 +1,242 @@
+/* =============================================================================
+ * Waybar Stylesheet
+ * Theme: Dark Purple & Transparent Islands (Pills)
+ * ============================================================================= */
+
+/* Definiciones de color globales */
+@define-color bg-dark rgba(26, 16, 37, 0.4);
+@define-color purple-main #6a1b9a;
+@define-color text-light #EFE9D9;
+
+/* Paleta de colores morados oscuros y vibrantes */
+@define-color island-bg rgba(24, 12, 38, 0.65);        /* Morado oscuro transparente */
+@define-color island-bg-hover rgba(46, 16, 75, 0.85);  /* Morado más brillante en hover */
+@define-color border-purple rgba(157, 78, 221, 0.35);  /* Borde morado sutil */
+@define-color border-hover rgba(199, 125, 255, 0.6);   /* Borde brillante en hover */
+@define-color neon-purple #c77dff;                    /* Texto y detalles principales */
+@define-color text-white #f8f9fa;
+
+/* Reset general de la barra */
+* {
+    font-family: "JetBrainsMono Nerd Font", "Roboto", "sans-serif";
+    font-size: 13px;
+    font-weight: bold;
+    border: none;
+    border-radius: 0;
+}
+
+window#waybar {
+    background-color: transparent;
+    color: @text-light;
+}
+
+/* Estilo Base para las Islas/Pills */
+#workspaces,
+#cpu,
+#memory,
+#clock,
+#tray,
+#network,
+#pulseaudio,
+#battery,
+#custom-notification,
+#custom-cava {
+    background-color: @island-bg;
+    border: 1px solid @border-purple;
+    border-radius: 16px;
+    padding: 2px 14px;
+    margin: 5px 4px;
+    color: @neon-purple;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    /* Transiciones suaves en GTK */
+    transition: background-color 0.2s ease-in-out, border-color 0.2s ease-in-out;
+}
+
+/* Efectos de Hover para cada Isla */
+#workspaces:hover,
+#cpu:hover,
+#memory:hover,
+#clock:hover,
+#tray:hover,
+#network:hover,
+#pulseaudio:hover,
+#battery:hover,
+#custom-notification:hover,
+#custom-cava:hover {
+    background-color: @island-bg-hover;
+    border-color: @border-hover;
+    box-shadow: 0 0 10px rgba(157, 78, 221, 0.4);
+}
+
+/* --- MÓDULO: ÁREAS DE TRABAJO (WORKSPACES) --- */
+#workspaces {
+    padding: 0px 6px;
+}
+
+#workspaces button {
+    padding: 0 6px;
+    color: rgba(199, 125, 255, 0.4); /* Inactivo */
+    background-color: transparent;
+    border-radius: 12px;
+}
+
+#workspaces button.active {
+    color: @text-white;
+    background-color: rgba(106, 27, 154, 0.6); /* Morado medio con opacidad */
+    border: 1px solid rgba(199, 125, 255, 0.6);
+}
+
+#workspaces button.urgent {
+    color: #ff5555;
+    background-color: rgba(255, 85, 85, 0.2);
+}
+
+#workspaces button:hover {
+    color: @text-white;
+    background-color: rgba(157, 78, 221, 0.3);
+}
+
+/* --- AJUSTES ESPECÍFICOS DE MÓDULOS --- */
+#clock {
+    color: #e0aaff;
+}
+
+#cpu {
+    color: #d8bbff;
+}
+
+#memory {
+    color: #c77dff;
+}
+
+#custom-cava {
+    font-family: "JetBrainsMono Nerd Font", "Symbols Nerd Font Mono";
+    font-size: 14px;
+    min-width: 80px; /* Evita que la isla cambie de tamaño constantemente */
+    transition: none; /* Mejora el rendimiento del visualizador */
+}
+
+#custom-cava.empty {
+    background-color: transparent;
+    border: none;
+    margin: 0;
+    padding: 0;
+    min-width: 0;
+    box-shadow: none;
+}
+
+#pulseaudio {
+    color: #b5e2fa;
+}
+
+#pulseaudio.muted {
+    color: rgba(181, 226, 250, 0.4);
+}
+
+#network {
+    color: #e0aaff;
+}
+
+#network.disconnected {
+    color: #ff5555;
+}
+
+#battery {
+    color: #9d4edd;
+}
+
+#battery.charging {
+    color: #50fa7b;
+}
+
+#battery.warning {
+    color: #ffb86c;
+}
+
+#battery.critical:not(.charging) {
+    color: #ff5555;
+    animation-name: blink;
+    animation-duration: 0.5s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+#tray {
+    padding: 0 10px;
+}
+
+#custom-notification {
+    color: #ff79c6;
+}
+
+/* Animación de parpadeo para batería crítica */
+@keyframes blink {
+    to {
+        background-color: rgba(255, 85, 85, 0.4);
+        color: #ffffff;
+        border-color: #ff5555;
+    }
+}
+
+/* =============================================================================
+ * Estilos heredados para Notificaciones / OSD (SwayNC / Widgets)
+ * ============================================================================= */
+@keyframes entry {
+    from {
+        opacity: 0;
+        margin-top: -15px;
+    }
+    to {
+        opacity: 1;
+        margin-top: 5px;
+    }
+}
+
+.notification {
+    background: @bg-dark;
+    border: 1px solid @purple-main;
+    border-radius: 15px;
+    color: @text-light;
+    margin: 5px;
+    padding: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    animation: entry 0.15s ease-out;
+}
+
+.notification-content {
+    background: transparent;
+    padding: 2px;
+}
+
+.summary {
+    font-family: "JetBrainsMono Nerd Font";
+    font-size: 14px;
+    font-weight: bold;
+    color: @text-light;
+}
+
+.body {
+    font-family: "JetBrainsMono Nerd Font";
+    font-size: 12px;
+    color: @text-light;
+}
+
+progressbar {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    min-height: 8px;
+    margin-top: 8px;
+}
+
+progress {
+    background-color: @purple-main;
+    border-radius: 10px;
+}
+
+.notification-default-action,
+.notification-action {
+    padding: 0;
+    margin: 0;
+    background: transparent;
+}

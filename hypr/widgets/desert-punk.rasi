@@ -1,0 +1,76 @@
+* {
+    bg: #1a1025e6;
+    fg: #EFE9D9;
+    accent: #6a1b9a;
+    border-color: #6a1b9a;
+    
+    background-color: transparent;
+    text-color: @fg;
+    font: "JetBrainsMono Nerd Font 10";
+}
+
+window {
+    width: 350px;
+    transparency: "real";
+    background-color: @bg;
+    border: 2px;
+    border-color: @accent;
+    border-radius: 12px;
+}
+
+mainbox {
+    children: [ "banner", "inputbar", "listview" ];
+}
+
+banner {
+    expand: false;
+    height: 150px;
+    background-image: url("~/.config/rofi/wallpaper.png", width);
+    border: 0px 0px 2px 0px;
+    border-color: @accent;
+    margin: 0px;
+}
+
+inputbar {
+    padding: 10px;
+    children: [ "prompt", "entry" ];
+    background-color: rgba(239, 233, 217, 0.05);
+}
+
+prompt {
+    text-color: @accent;
+    padding: 0px 10px 0px 5px;
+    font: "JetBrainsMono Nerd Font 12 bold";
+}
+
+entry {
+    placeholder: "Buscar...";
+    placeholder-color: rgba(239, 233, 217, 0.3);
+}
+
+listview {
+    lines: 8;
+    columns: 1;
+    fixed-height: false;
+    padding: 5px;
+}
+
+element {
+    padding: 8px;
+    spacing: 10px;
+    border-radius: 6px;
+}
+
+element selected {
+    background-color: @accent;
+    text-color: @fg;
+}
+
+element-text {
+    vertical-align: 0.5;
+    text-color: inherit;
+}
+
+element-icon {
+    size: 24px;
+}

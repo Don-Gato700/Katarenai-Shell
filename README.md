@@ -26,8 +26,7 @@ Bienvenido a **Katarenai-Shell**, un entorno de escritorio minimalista y atmosf�
 La shell utiliza componentes flotantes para maximizar la visibilidad del fondo de pantalla:
 
 ### 1. La Barra Tótem (Panel Lateral Izquierdo)
-Una pila vertical de bloques independientes implementada en **Waybar** que flotan en el lado izquierdo de la pantalla.
-*   **Indicador de Espacios de Trabajo (Workspaces):** Reemplaza los números estándar con glifos abstractos y fases lunares que brillan dinámicamente según el workspace activo.
+*   **Indicador de Espacios de Trabajo (Workspaces):** Un Pacman.
 
 ### 2. El Menú (Lanzador Rofi)
 Un lanzador de aplicaciones minimalista adaptado a la paleta morada del sistema.

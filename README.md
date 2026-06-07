@@ -41,6 +41,7 @@ Un panel lateral elegante que gestiona notificaciones y controles multimedia, ut
 *   **OSD (On-Screen Display):** Scripts personalizados para volumen y brillo con barras de progreso integradas en las notificaciones.
 *   **Media Player:** Widget con soporte para carátulas de álbumes y control de reproducción.
 *   **Cava Toggle:** Script para activar/desactivar el visualizador de audio y ahorrar recursos.
+*   **Wallpaper Selector:** Selector integrado con Rofi para cambiar el fondo dinámicamente.
 
 ## 🚀 Instalación (Arch Linux)
 

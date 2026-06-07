@@ -16,6 +16,12 @@ install_deps() {
         exit 1
     fi
 
+    # Verificar e instalar sudo si no existe
+    if ! command -v sudo >/dev/null 2>&1; then
+        echo -e "${CYAN}Sudo no detectado. Instalando...${NC}"
+        pacman -S --needed --noconfirm sudo
+    fi
+
     # Instalación de paquetes base desde repositorios oficiales
     sudo pacman -S --needed --noconfirm \
         hyprland waybar swww swaync rofi-wayland \
@@ -24,14 +30,17 @@ install_deps() {
         noto-fonts-emoji pavucontrol libpulse \
         networkmanager sed awk acpi git base-devel
 
-    # Instalación de dependencias críticas desde AUR (waypaper y quickshell)
+    # Verificar/Instalar AUR Helper (yay o paru)
     AUR_HELPER=$(command -v yay || command -v paru)
-    if [ -n "$AUR_HELPER" ]; then
-        echo -e "${CYAN}Instalando componentes adicionales desde AUR ($AUR_HELPER)...${NC}"
-        $AUR_HELPER -S --needed --noconfirm waypaper orbit-wifi
-    else
-        echo -e "${PURPLE}Aviso: No se detectó yay/paru. Instala manualmente 'waypaper'.${NC}"
+    if [ -z "$AUR_HELPER" ]; then
+        echo -e "${CYAN}No se detectó yay ni paru. Instalando yay desde AUR...${NC}"
+        git clone https://aur.archlinux.org/yay.git /tmp/yay
+        (cd /tmp/yay && makepkg -si --noconfirm)
+        AUR_HELPER="yay"
     fi
+
+    echo -e "${CYAN}Instalando componentes adicionales desde AUR ($AUR_HELPER)...${NC}"
+    $AUR_HELPER -S --needed --noconfirm waypaper python-pillow orbit-wifi
 }
 
 deploy_configs() {
@@ -52,13 +61,18 @@ deploy_assets() {
     
     # Wallpapers - Clonando repositorio externo solicitado
     WP_DIR="$HOME/Pictures/Wallpapers/Slashdog29"
-    mkdir -p "$HOME/Pictures/Wallpapers"
-    if [ ! -d "$WP_DIR" ]; then
-        echo -e "${CYAN}Clonando repositorio de wallpapers (Slashdog29)...${NC}"
-        git clone --depth 1 https://github.com/Slashdog29/wallparpers-ramdon "$WP_DIR"
-    else
-        echo -e "${CYAN}El repositorio de wallpapers ya existe, actualizando...${NC}"
-        git -C "$WP_DIR" pull
+
+    echo -e "${CYAN}¿Deseas descargar/actualizar el repositorio de wallpapers de Slashdog29? (s/n)${NC}"
+    read -r wp_response
+    if [[ "$wp_response" =~ ^([sS][iI]|[sS])$ ]]; then
+        mkdir -p "$HOME/Pictures/Wallpapers"
+        if [ ! -d "$WP_DIR" ]; then
+            echo -e "${CYAN}Clonando repositorio de wallpapers (Slashdog29)...${NC}"
+            git clone --depth 1 https://github.com/Slashdog29/wallparpers-ramdon "$WP_DIR"
+        else
+            echo -e "${CYAN}El repositorio de wallpapers ya existe, actualizando...${NC}"
+            git -C "$WP_DIR" pull
+        fi
     fi
 
     # Iconos
@@ -69,7 +83,7 @@ deploy_assets() {
 
     # Intentar aplicar el primer wallpaper si swww está corriendo
     if pgrep -x "swww-daemon" > /dev/null; then
-        WP=$(find "$WP_DIR" -type f \( -name "*.jpg" -o -name "*.png" -o -name "*.jpeg" -o -name "*.webp" \) | head -n 1)
+        WP=$(find "$WP_DIR" -type f \( -name "*.jpg" -o -name "*.png" -o -name "*.jpeg" -o -name "*.webp" \) 2>/dev/null | head -n 1)
         [ -n "$WP" ] && swww img "$WP" --transition-type center
     fi
 }

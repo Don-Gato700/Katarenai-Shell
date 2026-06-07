@@ -6,9 +6,9 @@
     "margin-top": 6,
     "margin-left": 10,
     "margin-right": 10,
-    "modules-left": ["hyprland/workspaces", "privacy", "custom/cava", "group/media"],
+    "modules-left": ["hyprland/workspaces", "cpu", "memory", "custom/cava", "custom/media"],
     "modules-center": ["clock"],
-    "modules-right": ["cpu", "memory", "tray", "pulseaudio", "battery", "custom/orbit", "custom/notification"],
+    "modules-right": ["tray", "custom/orbit", "pulseaudio", "battery", "custom/notification"],
 
     "tray": {
         "icon-size": 18,
@@ -18,23 +18,6 @@
     "group/power": {
         "orientation": "horizontal",
         "modules": ["custom/power_profile", "battery"]
-    },
-
-    "privacy": {
-        "icon-spacing": 4,
-        "icon-size": 18,
-        "nodes": [
-            {
-                "type": "audio-in",
-                "tooltip": true,
-                "tooltip-icon-size": 24
-            },
-            {
-                "type": "camera",
-                "tooltip": true,
-                "tooltip-icon-size": 24
-            }
-        ]
     },
 
     "hyprland/workspaces": {
@@ -52,17 +35,12 @@
     },
 
     "cpu": {
-        "interval": 10,
-        "format": " {usage}%",
-        "tooltip": false,
-        "on-click": "~/.config/hypr/widgets/optimize.sh"
+        "format": " {usage}%",
+        "tooltip": false
     },
 
     "memory": {
-        "interval": 30,
-        "format": " {percentage}%",
-        "max-length": 10,
-        "on-click": "~/.config/hypr/widgets/optimize.sh"
+        "format": " {}%"
     },
     "custom/cava": {
         "format": "{}",
@@ -145,16 +123,13 @@
     },
 
     "custom/media": {
-    "format": "{icon} {text}",
+    "format": "{}",
     "return-type": "json",
     "max-length": 40,
-    "format-icons": {
-        "default": "󰝚"
-    },
     "escape": true,
-    "exec": "~/.config/hypr/widgets/mediaplayer.sh 2> /dev/null",
+    "exec": "$HOME/.config/hypr/widgets/mediaplayer.sh 2> /dev/null",
     "on-click": "playerctl play-pause",
-    "on-click-right": "~/.config/hypr/widgets/mediaplayer.sh --show-art",
+    "on-click-right": "$HOME/.config/hypr/widgets/mediaplayer.sh --show-art",
     "on-scroll-up": "playerctl next",
     "on-scroll-down": "playerctl previous"
     },
@@ -170,10 +145,9 @@
         "format": "{icon}",
         "format-icons": {
             "Playing": "󰏤",
-            "Paused": "󰐊",
-            "Stopped": "󰓛"
+            "Paused": "󰐊"
         },
-        "exec": "playerctl status 2>/dev/null || echo 'Stopped'",
+        "exec": "playerctl status 2>/dev/null",
         "return-type": "string",
         "interval": 1,
         "on-click": "playerctl play-pause",

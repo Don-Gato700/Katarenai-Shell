@@ -2,6 +2,10 @@
 @define-color bg-dark rgba(26, 16, 37, 0.4);
 @define-color purple-main #6a1b9a;
 @define-color text-light #EFE9D9;
+@define-color neon-purple #c77dff;
+@define-color border-hover rgba(199, 125, 255, 0.6);
+@define-color island-bg rgba(24, 12, 38, 0.85);
+@define-color border-purple rgba(157, 78, 221, 0.35);
 
 @keyframes entry {
     from {
@@ -24,6 +28,33 @@
     padding: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
     animation: entry 0.15s ease-out;
+}
+
+/* Estilo específico para cuando se muestra la carátula de música */
+[name="MusicPanel"] {
+    background-color: rgba(24, 12, 38, 0.9);
+    border: 2px solid @neon-purple;
+    border-radius: 20px;
+    min-width: 300px;
+    padding: 20px;
+    box-shadow: 0 0 20px rgba(199, 125, 255, 0.3);
+    margin: 10px;
+}
+
+/* Estilo para los botones dentro de la notificación (desplegables) */
+.notification-action {
+    background-color: @island-bg;
+    border: 1px solid @border-purple;
+    border-radius: 12px;
+    color: @text-light;
+    margin: 10px 5px;
+    padding: 8px 16px;
+    font-size: 16px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+.notification-action:hover { 
+    background-color: @neon-purple; 
+    color: #1a1025;
 }
 
 .notification-content {
@@ -57,9 +88,13 @@ progress {
     border-radius: 10px;
 }
 
+/* Color diferenciado para la barra de progreso de música */
+[name="MusicPanel"] progress {
+    background-color: @neon-purple;
+}
+
 /* Ocultar botones innecesarios para el OSD */
-.notification-default-action,
-.notification-action {
+.notification-default-action {
     padding: 0;
     margin: 0;
     background: transparent;

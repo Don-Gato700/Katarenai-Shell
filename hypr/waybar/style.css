@@ -22,7 +22,12 @@
     font-weight: bold;
     border: none;
     border-radius: 0;
-    transition: 200ms;
+}
+
+/* Transiciones específicas en lugar de globales para ahorrar CPU */
+#workspaces button, 
+#cpu, #memory, #clock, #pulseaudio, #battery, #custom-media {
+    transition: background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 window#waybar {
@@ -31,7 +36,7 @@ window#waybar {
 }
 
 /* Estilo Base para las Islas/Pills */
-#workspaces, #cpu, #memory, #clock, #tray, #custom-orbit, #pulseaudio, #battery, #custom-notification, #custom-cava, #custom-media, #privacy-item, #custom-media-prev, #custom-media-play-pause, #custom-media-next {
+#workspaces, #cpu, #memory, #clock, #tray, #custom-orbit, #pulseaudio, #battery, #custom-notification, #custom-cava, #custom-media {
     background-color: @island-bg;
     border: 1px solid @border-purple;
     border-radius: 16px;
@@ -40,7 +45,7 @@ window#waybar {
 }
 
 /* Efectos de Hover para cada Isla */
-#workspaces:hover, #cpu:hover, #memory:hover, #clock:hover, #tray:hover, #custom-orbit:hover, #pulseaudio:hover, #battery:hover, #custom-notification:hover, #custom-cava:hover, #custom-media:hover, #privacy-item:hover, #custom-media-prev:hover, #custom-media-play-pause:hover, #custom-media-next:hover {
+#workspaces:hover, #cpu:hover, #memory:hover, #clock:hover, #tray:hover, #custom-orbit:hover, #pulseaudio:hover, #battery:hover, #custom-notification:hover, #custom-cava:hover, #custom-media:hover {
     background-color: @island-bg-hover;
     border-color: @border-hover;
     box-shadow: 0 0 10px rgba(157, 78, 221, 0.4);
@@ -84,9 +89,8 @@ window#waybar {
 }
 
 #custom-media {
-    color: #c77dff;
-    min-width: 100px; /* Aumentado para que el texto sea legible */
-    padding: 2px 12px;
+    color: #b79ced;
+    min-width: 100px;
 }
 
 #custom-media.playing {
@@ -100,17 +104,6 @@ window#waybar {
     border-color: rgba(157, 78, 221, 0.2);
 }
 
-#custom-media.stopped {
-    color: rgba(199, 125, 255, 0.3);
-    font-style: normal;
-}
-
-/* Estilo para los botones dentro del drawer */
-.media-controls {
-    margin-left: 2px;
-    margin-right: 2px;
-}
-
 #memory {
     color: #c77dff;
 }
@@ -118,18 +111,18 @@ window#waybar {
 #custom-cava {
     font-family: "JetBrainsMono Nerd Font", "Symbols Nerd Font Mono";
     font-size: 14px;
-    min-width: 20px; 
-    transition: none; 
+    min-width: 80px; /* Evita que la isla cambie de tamaño constantemente */
+    transition: none; /* Mejora el rendimiento del visualizador */
 }
 
-#custom-cava.disabled {
+#custom-cava.empty {
     background-color: transparent;
     border: none;
     margin: 0;
 }
 
 #pulseaudio {
-    color: #9d4edd;
+    color: #b5e2fa;
 }
 
 #pulseaudio.muted {
@@ -163,15 +156,6 @@ window#waybar {
 
 #custom-notification {
     color: #ff79c6;
-}
-
-/* --- NUEVOS MÓDULOS: PRIVACIDAD (MIC Y CAM) --- */
-#privacy-item.audio-in {
-    color: #ffb86c; /* Naranja/Ámbar */
-}
-
-#privacy-item.camera {
-    color: #ff5555; /* Rojo */
 }
 
 /* Animación de parpadeo para batería crítica */

@@ -50,10 +50,15 @@ deploy_configs() {
 deploy_assets() {
     echo -e "${CYAN}[3/6] Configurando imágenes e iconos...${NC}"
     
-    # Wallpapers
-    mkdir -p ~/Pictures/Wallpapers
-    if [ -d "./assets/wallpapers" ]; then
-        cp -rf ./assets/wallpapers/* ~/Pictures/Wallpapers/
+    # Wallpapers - Clonando repositorio externo solicitado
+    WP_DIR="$HOME/Pictures/Wallpapers/Slashdog29"
+    mkdir -p "$HOME/Pictures/Wallpapers"
+    if [ ! -d "$WP_DIR" ]; then
+        echo -e "${CYAN}Clonando repositorio de wallpapers (Slashdog29)...${NC}"
+        git clone --depth 1 https://github.com/Slashdog29/wallparpers-ramdon "$WP_DIR"
+    else
+        echo -e "${CYAN}El repositorio de wallpapers ya existe, actualizando...${NC}"
+        git -C "$WP_DIR" pull
     fi
 
     # Iconos
@@ -64,7 +69,7 @@ deploy_assets() {
 
     # Intentar aplicar el primer wallpaper si swww está corriendo
     if pgrep -x "swww-daemon" > /dev/null; then
-        WP=$(find ~/Pictures/Wallpapers/Katarenai -type f | head -n 1)
+        WP=$(find "$WP_DIR" -type f \( -name "*.jpg" -o -name "*.png" -o -name "*.jpeg" -o -name "*.webp" \) | head -n 1)
         [ -n "$WP" ] && swww img "$WP" --transition-type center
     fi
 }

@@ -39,7 +39,7 @@ rm -f /tmp/cava_config_waybar /tmp/cava_disabled
 
 echo -e "${CYAN}[4/5] Limpiando assets (opcional)...${NC}"
 # Solo eliminamos la subcarpeta del proyecto para no borrar otros wallpapers del usuario
-rm -rf ~/Pictures/Wallpapers/Katarenai 2>/dev/null
+rm -rf ~/Pictures/Wallpapers/Slashdog29 2>/dev/null
 
 echo -e "${CYAN}[5/5] Finalizando...${NC}"
 

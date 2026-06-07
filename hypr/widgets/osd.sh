@@ -11,8 +11,9 @@ case $1 in
 esac
 
 # 2. Obtener los valores actuales para la notificación
-volume=$(wpctl get-volume @DEFAULT_AUDIO_SINK@ | awk '{print $2 * 100}' | cut -d. -f1)
-is_muted=$(wpctl get-volume @DEFAULT_AUDIO_SINK@ | grep -q "\[MUTED\]" && echo "yes" || echo "no")
+# Optimizamos la obtención del volumen en una sola línea de awk
+read -r volume is_muted <<< $(wpctl get-volume @DEFAULT_AUDIO_SINK@ | awk '{print $2*100, ($3=="[MUTED]"?"yes":"no")}')
+volume=${volume%.*} # Eliminar decimales si existen
 brightness=$(brightnessctl -m | cut -d, -f4 | tr -d '%')
 mic_muted=$(wpctl get-volume @DEFAULT_AUDIO_SOURCE@ | grep -q "\[MUTED\]" && echo "yes" || echo "no")
 

@@ -48,7 +48,7 @@ Un panel lateral elegante que gestiona notificaciones y controles multimedia, ut
 El despliegue está automatizado para sistemas Arch Linux. Asegúrate de tener un helper de AUR como `yay` o `paru` instalado.
 
 ```bash
-git clone https://github.com/tu-usuario/Katarenai-Shell.git
+git clone https://github.com/Don-Gato700/Katarenai-Shell.git
 cd Katarenai-Shell
 chmod +x install.sh
 ./install.sh
